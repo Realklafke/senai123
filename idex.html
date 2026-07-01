@@ -1,1 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia Visual de Redes para Automação</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      padding: 24px 28px 32px;
+      transition: 0.3s;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #0b2b44;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    h1 small {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #2c5f7e;
+      background: #e6edf5;
+      padding: 4px 14px;
+      border-radius: 40px;
+      margin-left: 6px;
+    }
+
+    .subhead {
+      color: #3a5a72;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+      border-left: 4px solid #00a1b0;
+      padding-left: 14px;
+      background: #f9fbfd;
+      border-radius: 0 12px 12px 0;
+    }
+
+    /* Abas */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid #dbe3ea;
+      padding-bottom: 2px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.rem;
+      font-weight: 500;
+      color: #3f5b74;
+      border-radius: 30px 30px 0 0;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+      bottom: -2px;
+      letter-spacing: 0.3px;
+    }
+
+    .tab-btn:hover {
+      background: #e2ecf3;
+      color: #003153;
+    }
+
+    .tab-btn.active {
+      background: white;
+      color: #003153;
+      border: 2px solid #dbe3ea;
+      border-bottom-color: white;
+      font-weight: 600;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.02);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fade 0.25s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from { opacity: 0.3; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards (primeira aba) */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 18px;
+      margin: 16px 0 10px;
+    }
+
+    .card {
+      background: #fafcff;
+      border: 1px solid #d7e0e8;
+      border-radius: 28px;
+      padding: 18px 10px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(0, 20, 30, 0.04);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #0097a7;
+      box-shadow: 0 12px 20px rgba(0, 120, 140, 0.12);
+    }
+
+    .card.selected {
+      border: 2px solid007c8c;
+      background: #eaf6f9;
+    }
+
+    .card-icon {
+      font-size: 2.8rem;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .card h3 {
+      color: #02b44;
+      font-weight: 600;
+      font-size: 1.25rem;
+      letter-spacing: -0.2px;
+    }
+
+    .card p.desc {
+      font-size: 0.8rem;
+      color: #2a5770;
+      margin-top: 6px;
+      opacity: 0.9;
+    }
+
+    .explicacao-cabo {
+      background: #eef5fa;
+      border-radius: 24px;
+      padding: 20px 24px;
+      margin: 18px 0 8px;
+      border-left: 5px solid #00838f;
+    }
+
+    .explicacao-cabo p {
+      font-size: 1.05rem;
+      color: #04313f;
+      line-height: 1.5;
+ }
+
+    .explicacao-cabo strong {
+      color: #005662;
+    }
+
+    /* segunda aba: topologias */
+    .topo-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .topo-btn {
+      background: white      border: 1px solid #bccbd6;
+      padding: 12px 28px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 1rem;
+      color: #1f435b;
+      cursor: pointer;
+      transition: 0.15s;
+      box-shadow: 0 2 4px rgba(0,0,0,0.02);
+      flex: 1 0 auto;
+      min-width: 140px;
+    }
+
+    .topo-btn:hover {
+      background: #dbe9f2;
+      border-color: #00838f;
+    }
+
+    .topo-btn.active {
+      background: #003153;
+      border-color: #003153      color: white;
+      box-shadow: 0 4px 8px rgba(0, 40 60, 0.2);
+    }
+
+    .topo-info {
+      background: #f7faff;
+      border-radius: 28px;
+      padding: 20px 24px;
+      border: 1px solid #dae3ec;
+      margin-top: 6px;
+    }
+
+    .topo-info h3 {
+      font-size:1.6rem;
+      font-weight: 500;
+      color: #002b3b;
+      border-bottom: 2px solid #cbd6;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .topo-info p {
+      font-size: 1rem;
+ color: #144a5e;
+      margin-bottom: 18px;
+      line-height: 1.5;
+       .vantagens-list {
+      display: flex;
+     -wrap: wrap;
+      gap: 24px 40px;
+      margin-top: 12px;
+    }
+
+    .antagens-list ul {
+      list-style: none;
+      flex 1 0 180px;
+    }
+
+    .vantagens-list li {
+      padding: 6px 0 6px 26px;
+      position: relative;
+      font-size: 0.95rem;
+      color: #094154;
+    }
+
+    .vantagens-list .vantagem::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #1f8b4c;
+      font: bold;
+      font-size: 1.2rem;
+    }
+
+    .vantagens-list .desvantagem::before {
+      content: "✗";
+      position: absolute;
+      left: 0;
+      color: #b13e3e;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .-titulo {
+      font-weight: 600;
+      color: #003153;
+      margin: 10px 06px;
+      font-size: 0.95rem;
+ text-transform: uppercase;
+      letter-spacing: 0.px;
+    }
+
+    .placeholder-msg {
+      color: #
