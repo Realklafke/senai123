@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
->
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guia Visual de Redes para Automação</title>
@@ -61,6 +61,8 @@
       padding-left: 14px;
       background: #f9fbfd;
       border-radius: 0 12px 12px 0;
+      padding-top: 4px;
+      padding-bottom: 4px;
     }
 
     /* Abas */
@@ -77,7 +79,7 @@
       background: transparent;
       border: none;
       padding: 12px 24px;
-      font-size: 1.rem;
+      font-size: 1rem;
       font-weight: 500;
       color: #3f5b74;
       border-radius: 30px 30px 0 0;
@@ -119,7 +121,7 @@
     /* Cards (primeira aba) */
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 18px;
       margin: 16px 0 10px;
     }
@@ -142,7 +144,7 @@
     }
 
     .card.selected {
-      border: 2px solid007c8c;
+      border: 2px solid #007c8c;
       background: #eaf6f9;
     }
 
@@ -153,7 +155,7 @@
     }
 
     .card h3 {
-      color: #02b44;
+      color: #0b2b44;
       font-weight: 600;
       font-size: 1.25rem;
       letter-spacing: -0.2px;
@@ -178,7 +180,7 @@
       font-size: 1.05rem;
       color: #04313f;
       line-height: 1.5;
- }
+    }
 
     .explicacao-cabo strong {
       color: #005662;
@@ -193,7 +195,8 @@
     }
 
     .topo-btn {
-      background: white      border: 1px solid #bccbd6;
+      background: white;
+      border: 1px solid #bccbd6;
       padding: 12px 28px;
       border-radius: 60px;
       font-weight: 500;
@@ -201,7 +204,7 @@
       color: #1f435b;
       cursor: pointer;
       transition: 0.15s;
-      box-shadow: 0 2 4px rgba(0,0,0,0.02);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
       flex: 1 0 auto;
       min-width: 140px;
     }
@@ -213,8 +216,9 @@
 
     .topo-btn.active {
       background: #003153;
-      border-color: #003153      color: white;
-      box-shadow: 0 4px 8px rgba(0, 40 60, 0.2);
+      border-color: #003153;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 40, 60, 0.2);
     }
 
     .topo-info {
@@ -226,48 +230,59 @@
     }
 
     .topo-info h3 {
-      font-size:1.6rem;
+      font-size: 1.6rem;
       font-weight: 500;
       color: #002b3b;
-      border-bottom: 2px solid #cbd6;
+      border-bottom: 2px solid #cbd6e2;
       padding-bottom: 8px;
       margin-bottom: 16px;
     }
 
     .topo-info p {
       font-size: 1rem;
- color: #144a5e;
+      color: #144a5e;
       margin-bottom: 18px;
       line-height: 1.5;
-       .vantagens-list {
+    }
+
+    .vantagens-list {
       display: flex;
-     -wrap: wrap;
+      flex-wrap: wrap;
       gap: 24px 40px;
       margin-top: 12px;
     }
 
-    .antagens-list ul {
+    .vantagens-section {
       list-style: none;
-      flex 1 0 180px;
+      flex: 1 0 180px;
     }
 
-    .vantagens-list li {
+    .list-titulo {
+      font-weight: 600;
+      color: #003153;
+      margin: 10px 0 6px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .vantagens-section li {
       padding: 6px 0 6px 26px;
       position: relative;
       font-size: 0.95rem;
       color: #094154;
     }
 
-    .vantagens-list .vantagem::before {
+    .vantagens-section .vantagem::before {
       content: "✓";
       position: absolute;
       left: 0;
       color: #1f8b4c;
-      font: bold;
+      font-weight: bold;
       font-size: 1.2rem;
     }
 
-    .vantagens-list .desvantagem::before {
+    .vantagens-section .desvantagem::before {
       content: "✗";
       position: absolute;
       left: 0;
@@ -275,15 +290,112 @@
       font-weight: bold;
       font-size: 1.2rem;
     }
+  </style>
+</head>
+<body>
 
-    .-titulo {
-      font-weight: 600;
-      color: #003153;
-      margin: 10px 06px;
-      font-size: 0.95rem;
- text-transform: uppercase;
-      letter-spacing: 0.px;
+  <div class="container">
+    <h1>Guia Visual de Redes <small>Automação Industrial</small></h1>
+    <div class="subhead">Entenda a infraestrutura física e lógica utilizada no chão de fábrica.</div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="mudarAba('cabos')">Cabos de Rede</button>
+      <button class="tab-btn" onclick="mudarAba('topologias')">Topologias de Rede</button>
+    </div>
+
+    <div id="cabos" class="tab-content active">
+      <div class="card-grid">
+        <div class="card selected" onclick="selecionarCabo(this, 'coaxial')">
+          <div class="card-icon">🖧</div>
+          <h3>Cabo Coaxial</h3>
+          <p class="desc">Antigo padrão industrial</p>
+        </div>
+        <div class="card" onclick="selecionarCabo(this, 'par-trancado')">
+          <div class="card-icon">🔌</div>
+          <h3>Par Trançado</h3>
+          <p class="desc">O mais comum (UTP/STP)</p>
+        </div>
+        <div class="card" onclick="selecionarCabo(this, 'fibra')">
+          <div class="card-icon">⚡</div>
+          <h3>Fibra Óptica</h3>
+          <p class="desc">Altíssima velocidade e imunidade</p>
+        </div>
+      </div>
+
+      <div class="explicacao-cabo">
+        <p id="texto-cabo"><strong>Cabo Coaxial:</strong> Muito utilizado no passado (redes antigas de automação como ControlNet), possui boa imunidade a ruídos eletromagnéticos devido à sua malha de blindagem interna grossa, mas foi amplamente substituído por tecnologias mais flexíveis e velozes.</p>
+      </div>
+    </div>
+
+    <div id="topologias" class="tab-content">
+      <div class="topo-buttons">
+        <button class="topo-btn active" onclick="selecionarTopologia(this, 'anel')">Anel (Ring)</button>
+        <button class="topo-btn" onclick="selecionarTopologia(this, 'estrela')">Estrela (Star)</button>
+        <button class="topo-btn" onclick="selecionarTopologia(this, 'barramento')">Barramento (Bus)</button>
+      </div>
+
+      <div class="topo-info">
+        <h3 id="topo-titulo">Topologia em Anel (Ring)</h3>
+        <p id="topo-desc">Os dispositivos são conectados em série formando um circuito fechado. Muito comum em ambientes de automação com protocolos de alta disponibilidade como MRP ou DLR, onde se um caminho falhar, os dados mudam de direção instantaneamente.</p>
+        
+        <div class="vantagens-list">
+          <ul class="vantagens-section">
+            <div class="list-titulo">Vantagens</div>
+            <span id="topo-vantagens">
+              <li class="vantagem">Alta redundância (se o anel quebrar, continua funcionando).</li>
+              <li class="vantagem">Fácil diagnóstico de rompimento físico.</li>
+            </span>
+          </ul>
+          <ul class="vantagens-section">
+            <div class="list-titulo">Desvantagens</div>
+            <span id="topo-desvantagens">
+              <li class="desvantagem">Protocolos de configuração de anel mais complexos.</li>
+              <li class="desvantagem">Custo ligeiramente maior de switches gerenciáveis.</li>
+            </span>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Banco de dados dinâmico para evitar poluição no HTML
+    const dadosCabos = {
+      'coaxial': '<strong>Cabo Coaxial:</strong> Muito utilizado no passado (redes antigas de automação como ControlNet), possui boa imunidade a ruídos eletromagnéticos devido à sua malha de blindagem interna grossa, mas foi amplamente substituído por tecnologias mais flexíveis e velozes.',
+      'par-trancado': '<strong>Par Trançado (RJ45):</strong> O padrão atual mais comum nas indústrias (Profinet, EtherNet/IP). Em ambientes fabris, utiliza-se a versão blindada (STP) para evitar interferências eletromagnéticas causadas por motores e inversores de frequência.',
+      'fibra': '<strong>Fibra Óptica:</strong> Imune a qualquer tipo de interferência eletromagnética (RFI/EMI). Ideal para interligar salas de controle a painéis de campo distantes, cobrindo quilômetros de distância com altíssima taxa de transmissão de dados.'
+    };
+
+    const dadosTopologias = {
+      'anel': {
+        titulo: 'Topologia em Anel (Ring)',
+        desc: 'Os dispositivos são conectados em série formando um circuito fechado. Muito comum em ambientes de automação com protocolos de alta disponibilidade como MRP ou DLR, onde se um caminho falhar, os dados mudam de direção instantaneamente.',
+        vantagens: ['Alta redundância (se o anel quebrar, continua funcionando).', 'Fácil diagnóstico de rompimento físico.'],
+        desvantagens: ['Protocolos de configuração de anel mais complexos.', 'Custo ligeiramente maior de switches gerenciáveis.']
+      },
+      'estrela': {
+        titulo: 'Topologia em Estrela (Star)',
+        desc: 'Cada dispositivo de automação (CLPs, IHMs, Inversores) se conecta de forma independente a um nó centralizado (Switch). É a arquitetura padrão das redes Ethernet industriais modernas.',
+        vantagens: ['Se um cabo falhar, apenas aquele dispositivo cai.', 'Facilidade para adicionar novos equipamentos.'],
+        desvantagens: ['Dependência total do nó central (se o switch queimar, para tudo).', 'Gasto muito maior com cabos direcionados ao switch.']
+      },
+      'barramento': {
+        titulo: 'Topologia em Barramento (Bus)',
+        desc: 'Todos os nós compartilham um único meio de transmissão linear. Extremamente comum em redes de campo tradicionais como Modbus RTU, Profibus DP e DeviceNet.',
+        vantagens: ['Extremamente barata e simples de instalar.', 'Usa pouquíssimo cabo se comparado à Estrela.'],
+        desvantagens: ['Se o cabo principal partir, a rede inteira é dividida ou para.', 'Difícil de diagnosticar o ponto exato da falha.']
+      }
+    };
+
+    // Controle de Abas
+    function mudarAba(abaId) {
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById(abaId).classList.add('active');
+      event.currentTarget.classList.add('active');
     }
 
-    .placeholder-msg {
-      color: #
+    // Seleção de Cabos
+    function selecionarCabo(elemento, tipo) {
+      document.querySelectorAll
